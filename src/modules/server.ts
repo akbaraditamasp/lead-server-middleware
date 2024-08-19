@@ -3,8 +3,10 @@ import inject from "../middlewares/inject.js";
 import CustomRequest from "../types/CustomRequest.js";
 import route from "../middlewares/route.js";
 import { resolve } from "path";
+import rxdb from "./rxdb.js";
 
-export default function server(sitesPath: string) {
+export default async function server(sitesPath: string) {
+  await rxdb.boot();
   const sites = resolve(sitesPath);
   const router = express.Router();
 
