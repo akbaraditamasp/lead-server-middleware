@@ -5,7 +5,10 @@ import route from "../middlewares/route.js";
 import { resolve } from "path";
 import rxdb from "./rxdb.js";
 
-export default async function server(sitesPath: string) {
+export default async function server(
+  sitesPath: string,
+  ...middlewares: RequestHandler[]
+) {
   await rxdb.boot();
   const sites = resolve(sitesPath);
   const router = express.Router();
@@ -20,7 +23,7 @@ export default async function server(sitesPath: string) {
     return (req as CustomRequest).site.public(req, res, next);
   });
 
-  router.get("*", route(sites) as RequestHandler);
+  router.get("*", ...middlewares, route(sites) as RequestHandler);
 
   return router;
 }
