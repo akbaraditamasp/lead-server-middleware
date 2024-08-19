@@ -1,6 +1,6 @@
 {
   "name": "@akbaraditamasp/lead-server-middleware",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "Express middleware for running lead project",
   "scripts": {
     "build": "tsc",
